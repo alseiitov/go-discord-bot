@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -39,6 +40,17 @@ func main() {
 	}
 
 	fmt.Println("Bot is running...")
+
+	go func() {
+		for {
+			check := makeRequest("alseiitov")
+			time.Sleep(10 * time.Second)
+			if check.FirstName != "Dossan" {
+				refreshToken()
+			}
+			time.Sleep(5 * time.Minute)
+		}
+	}()
 
 	<-make(chan struct{})
 

@@ -2,12 +2,35 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
 )
+
+func refreshToken() {
+	data := fmt.Sprintf("{\"jwt_token\":\"%v\"}", auth)
+	req, _ := http.NewRequest("POST", refreshURL, strings.NewReader(data))
+	req.Header.Add("Accept", "application/json")
+	req.Header.Add("Content-Type", "application/json")
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Println("Error on response.\n[ERRO] -", err)
+	}
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	var newToken jwt
+	json.Unmarshal(body, &newToken)
+	if newToken.JwtToken != "" {
+		auth = newToken.JwtToken
+		log.Println("Token updated: ", auth, ".")
+	} else {
+		log.Println(string(body))
+	}
+}
 
 func makeRequest(username string) user {
 	var tempUser user
