@@ -95,3 +95,7 @@ type UserInfo struct {
 		Message   interface{} `json:"message"`
 	} `json:"image"`
 }
+
+type jwt struct {
+	JwtToken string `json:"jwt_token"`
+}
