@@ -1,36 +1,15 @@
 package main
 
+import "time"
+
 type user struct {
+	Login          string
 	FirstName      string
 	LastName       string
 	InSchoolStatus int
 	Last           string
 	Avatar         string
-}
-
-type Users struct {
-	Data struct {
-		EventUser []struct {
-			User struct {
-				ID          int    `json:"id"`
-				GithubLogin string `json:"githubLogin"`
-				FirstName   string `json:"firstName"`
-				LastName    string `json:"lastName"`
-				Xp          struct {
-					Aggregate struct {
-						Sum struct {
-							Amount interface{} `json:"amount"`
-						} `json:"sum"`
-					} `json:"aggregate"`
-				} `json:"xp"`
-				Audits struct {
-					Aggregate struct {
-						Count int `json:"count"`
-					} `json:"aggregate"`
-				} `json:"audits"`
-			} `json:"user"`
-		} `json:"event_user"`
-	} `json:"data"`
+	DoneProjects   []string
 }
 
 type UserInfo struct {
@@ -81,6 +60,54 @@ type UserInfo struct {
 			} `json:"user"`
 		} `json:"data"`
 	} `json:"progress"`
+	Exams struct {
+		Data struct {
+			Object []struct {
+				Events []struct {
+					CreatedAt time.Time `json:"createdAt"`
+					EndAt     time.Time `json:"endAt"`
+					ID        int       `json:"id"`
+				} `json:"events"`
+				ID int `json:"id"`
+			} `json:"object"`
+		} `json:"data"`
+	} `json:"exams"`
+	ExamRecords struct {
+		Data struct {
+			Exam156 []struct {
+				Amount int `json:"amount"`
+				Attrs  struct {
+					EventID  int `json:"eventId"`
+					ObjectID int `json:"objectId"`
+				} `json:"attrs"`
+				CreatedAt time.Time `json:"createdAt"`
+			} `json:"exam_156"`
+			Exam162 []struct {
+				Amount int `json:"amount"`
+				Attrs  struct {
+					EventID  int `json:"eventId"`
+					ObjectID int `json:"objectId"`
+				} `json:"attrs"`
+				CreatedAt time.Time `json:"createdAt"`
+			} `json:"exam_162"`
+			Exam165 []struct {
+				Amount int `json:"amount"`
+				Attrs  struct {
+					EventID  int `json:"eventId"`
+					ObjectID int `json:"objectId"`
+				} `json:"attrs"`
+				CreatedAt time.Time `json:"createdAt"`
+			} `json:"exam_165"`
+			Exam168 []struct {
+				Amount int `json:"amount"`
+				Attrs  struct {
+					EventID  int `json:"eventId"`
+					ObjectID int `json:"objectId"`
+				} `json:"attrs"`
+				CreatedAt time.Time `json:"createdAt"`
+			} `json:"exam_168"`
+		} `json:"data"`
+	} `json:"examRecords"`
 	Image struct {
 		Data []struct {
 			EmpID     int    `json:"emp_id"`
