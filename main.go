@@ -62,9 +62,9 @@ func main() {
 		port = "8080"
 	}
 
-	http.ListenAndServe(":"+port, nil)
-
 	go autoUpdateToken()
+
+	http.ListenAndServe(":"+port, nil)
 
 	<-make(chan struct{})
 }
