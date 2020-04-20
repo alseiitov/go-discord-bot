@@ -93,7 +93,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if strings.ToLower(m.Content) == "help" {
-		msg := fmt.Sprintf("```user username\nget info abount user\n```")
+		msg := fmt.Sprintf("```send username to get info about a student```")
 		_, _ = s.ChannelMessageSend(m.ChannelID, msg)
 		return
 	}
